@@ -38,7 +38,7 @@ input,textarea,select,button{font-family:'Nunito',sans-serif;}
 #setup-overlay{
   position:fixed;inset:0;z-index:1000;
   background:var(--bg);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  display:none !important;flex-direction:column;align-items:center;justify-content:center;
   padding:24px;
 }
 .setup-card{
@@ -1041,14 +1041,12 @@ async function clearAllData(){
    BOOT — check for saved session credentials
 ═══════════════════════════════════════════════════════════ */
 (async function boot(){
-  const sk=sessionStorage.getItem('hpb_api_key');
-  const sb=sessionStorage.getItem('hpb_bin_id');
-  if(sk&&sb){
-    API_KEY=sk; BIN_ID=sb;
-    const ok=await loadBin();
-    if(ok){finishSetup();return;}
-  }
-  // show setup
+  API_KEY = '$2a$10$aopYMJm3ovtvnPec08jt1.WtUPm6Te9sKn6Zg2A00gAM1lHAJXTgW';
+  BIN_ID  = '69f6763d36566621a81a6db2';
+  const ok = await loadBin();
+  if(ok){ finishSetup(); return; }
+  // fallback: mostra setup se falhar
+  document.getElementById('setup-overlay').style.display='flex';
 })();
 </script>
 </body>
